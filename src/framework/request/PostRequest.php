@@ -2,8 +2,7 @@
 /**
  * Lucille
  *
- * @author     Andreas Habel <mail@ahabel.de>
- * @copyright  Conperience GmbH, Andreas Habel and contributors
+ * @author     Matthias Jacobi <mail@majaco.de>
  *
  */
 
@@ -26,18 +25,20 @@ class PostRequest extends Request {
     private $requestBody;
 
     /**
-     * @param Uri                        $uri                 Request Uir object
-     * @param HeaderCollection           $headerCollection    Header Collection
-     * @param RequestParameterCollection $parameterCollection GET/POST parameters
-     * @param RequestBody                $requestBody         POST request body
+     * @param Uri                        $uri                       Request Uir object
+     * @param HeaderCollection           $headerCollection          Header Collection
+     * @param RequestParameterCollection $parameterCollection       GET/POST parameters
+     * @param RequestParameterCollection $cookieParameterCollection Cookie parameters
+     * @param RequestBody                $requestBody               POST request body
      */
     public function __construct(
         Uri $uri,
         HeaderCollection $headerCollection,
         RequestParameterCollection $parameterCollection,
+        RequestParameterCollection $cookieParameterCollection,
         RequestBody $requestBody
     ) {
-        parent::__construct($uri, $headerCollection, $parameterCollection);
+        parent::__construct($uri, $headerCollection, $parameterCollection, $cookieParameterCollection);
         $this->requestBody = $requestBody;
     }
     

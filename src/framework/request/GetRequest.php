@@ -23,13 +23,15 @@ class GetRequest extends Request {
      * @param Uri                        $uri                 Request Uir object
      * @param HeaderCollection           $headerCollection    Header Collection
      * @param RequestParameterCollection $parameterCollection GET parameter
+     * @param RequestParameterCollection $cookieParameterCollection Cookie parameters
      */
     public function __construct(
         Uri $uri,
         HeaderCollection $headerCollection,
-        RequestParameterCollection $parameterCollection
+        RequestParameterCollection $parameterCollection,
+        RequestParameterCollection $cookieParameterCollection
     ) {
-        parent::__construct($uri, $headerCollection, $parameterCollection);
+        parent::__construct($uri, $headerCollection, $parameterCollection, $cookieParameterCollection);
     }
     
 }

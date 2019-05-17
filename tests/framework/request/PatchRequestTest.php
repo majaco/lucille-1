@@ -77,7 +77,7 @@ class PatchRequestTest extends TestCase {
         );
         
         $body = new RawRequestBody('foo bar');
-        return new PatchRequest($uri, $headerCollection, $parameterCollection, $body);
+        return new PatchRequest($uri, $headerCollection, $parameterCollection, $parameterCollection, $body);
     }
     
 }

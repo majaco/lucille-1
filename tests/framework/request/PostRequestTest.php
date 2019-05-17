@@ -4,7 +4,6 @@
  *
  * @copyright  Andreas Habel
  * @author     Andreas Habel <mail@ahabel.de>
- *
  */
 
 namespace Lucille\UnitTests;
@@ -22,8 +21,9 @@ use PHPUnit\Framework\TestCase;
 /**
  * @coversDefaultClass \Lucille\Request\PostRequest
  */
-class PostRequestTest extends TestCase {
-    
+class PostRequestTest extends TestCase
+{
+
     /**
      * @covers ::__construct
      * @uses   \Lucille\Request\Request
@@ -35,14 +35,15 @@ class PostRequestTest extends TestCase {
      * @uses   \Lucille\Request\Parameter\StringRequestParameterName
      * @uses   \Lucille\Request\Body\RawRequestBody
      */
-    public function testPostRequest() {
+    public function testPostRequest()
+    {
         $request = $this->buildPostRequest();
-        
-        $this->assertEquals('/demo',   $request->getUri()->asString());
-        $this->assertEquals('h1: v1',  $request->getHeaderCollection()->getHeader('h1')->asString());
-        $this->assertEquals('value1',  $request->getParameterCollection()->getParam('param1')->asString());
+
+        $this->assertEquals('/demo', $request->getUri()->asString());
+        $this->assertEquals('h1: v1', $request->getHeaderCollection()->getHeader('h1')->asString());
+        $this->assertEquals('value1', $request->getParameterCollection()->getParam('param1')->asString());
     }
-    
+
     /**
      * @covers ::getBody
      * @uses   \Lucille\Request\PostRequest::__construct
@@ -55,13 +56,15 @@ class PostRequestTest extends TestCase {
      * @uses   \Lucille\Request\Parameter\StringRequestParameterName
      * @uses   \Lucille\Request\Body\RawRequestBody
      */
-    public function testGetRawRequestBody() {
+    public function testGetRawRequestBody()
+    {
         $request = $this->buildPostRequest();
-        
+
         $this->assertEquals('foo bar', $request->getBody()->asString());
     }
-    
-    private function buildPostRequest(): PostRequest {
+
+    private function buildPostRequest(): PostRequest
+    {
         $uri = new Uri('/demo');
 
         $headerCollection = new HeaderCollection();
@@ -77,7 +80,8 @@ class PostRequestTest extends TestCase {
         );
 
         $body = new RawRequestBody('foo bar');
-        return new PostRequest($uri, $headerCollection, $parameterCollection, $body);
+
+        return new PostRequest($uri, $headerCollection, $parameterCollection, $parameterCollection, $body);
     }
-    
+
 }

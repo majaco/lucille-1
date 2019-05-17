@@ -58,7 +58,7 @@ class PostRoutingChainTest extends TestCase {
         $chain = new PostRoutingChain();
         $chain->addRouter($commandRouter);
         
-        $res = $chain->route(new PostRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new EmptyRequestBody()));
+        $res = $chain->route(new PostRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new RequestParameterCollection(), new EmptyRequestBody()));
         $this->assertInstanceOf(Command::class, $res);
     }
     
@@ -79,7 +79,7 @@ class PostRoutingChainTest extends TestCase {
         $chain->addRouter($nextRouter);
         $chain->addRouter($commandRouter);
         
-        $res = $chain->route(new PostRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new EmptyRequestBody()));
+        $res = $chain->route(new PostRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new RequestParameterCollection(), new EmptyRequestBody()));
         $this->assertInstanceOf(Command::class, $res);
     }
     
@@ -98,7 +98,7 @@ class PostRoutingChainTest extends TestCase {
      */
     public function testRoutingChainHasNoRoutersThrowsRoutingChainConfigurationException() {
         $chain = new PostRoutingChain();
-        $chain->route(new PostRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new EmptyRequestBody()));
+        $chain->route(new PostRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new RequestParameterCollection(), new EmptyRequestBody()));
     }
     
 }

@@ -48,7 +48,7 @@ class GetRequestTest extends TestCase {
             )
         );
         
-        $request = new GetRequest($uri, $headerCollection, $parameterCollection);
+        $request = new GetRequest($uri, $headerCollection, $parameterCollection, $parameterCollection);
         
         $this->assertEquals('/demo',  $request->getUri()->asString());
         $this->assertEquals('h1: v1',     $request->getHeaderCollection()->getHeader('h1')->asString());

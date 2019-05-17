@@ -37,12 +37,14 @@ class Factory {
         array $globalGet = null,
         array $globalPost = null,
         array $globalServer = null,
+        array $cookie = null,
         string $inputStream = 'php://input'
     ): RequestFactory {
         $globalGet    = $globalGet ?? $_GET;
         $globalPost   = $globalPost ?? $_POST;
         $globalServer = $globalServer ?? $_SERVER;
-        return new RequestFactory($globalGet, $globalPost, $globalServer, $inputStream);
+        $cookie       = $cookie ?? $_COOKIE;
+        return new RequestFactory($globalGet, $globalPost, $globalServer, $cookie, $inputStream);
     }
     
     /**

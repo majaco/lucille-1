@@ -37,62 +37,74 @@ class RequestFactory {
     private $globalServer;
 
     /**
+     * @var array
+     */
+    private $cookie;
+
+    /**
      * @var string
      */
     private $inputStream;
-    
+
     /**
      * @param array  $globalGet    _GET source data
      * @param array  $globalPost   _POST source data
      * @param array  $globalServer _SERVER source data
+     * @param array  $cookie       _COOKIE source data
      * @param string $inputStream  Input stream (default: php://input)
      */
-    public function __construct(array $globalGet, array $globalPost, array $globalServer, string $inputStream) {
+    public function __construct(array $globalGet, array $globalPost, array $globalServer, array $cookie, string $inputStream) {
         $this->globalGet    = $globalGet;
         $this->globalPost   = $globalPost;
+        $this->cookie       = $cookie;
         $this->globalServer = $globalServer;
         $this->inputStream  = $inputStream;
     }
-    
+
     /**
      * @return Request
      * @throws UnsupportedRequestMethodException
      */
     public function createRequest(): Request {
         $url = new Uri($this->globalServer['REQUEST_URI']);
-        
+
         // build header collection
         $headerCollection = HeaderCollection::fromSource($this->globalServer);
-        
+
         switch (strtoupper($this->globalServer['REQUEST_METHOD'])) {
             case RequestMethod::GET: {
                 $parameterCollection = RequestParameterCollection::fromArray($this->globalGet);
-                return new GetRequest($url, $headerCollection, $parameterCollection);
+                $cookieParameterCollection = RequestParameterCollection::fromArray($this->cookie);
+                return new GetRequest($url, $headerCollection, $parameterCollection, $cookieParameterCollection);
             }
             case RequestMethod::POST: {
                 $parameterCollection = RequestParameterCollection::fromArray($this->globalPost);
                 $requestBody = RequestBodyFactory::fromStream($this->inputStream);
-                return new PostRequest($url, $headerCollection, $parameterCollection, $requestBody);
+                $cookieParameterCollection = RequestParameterCollection::fromArray($this->cookie);
+                return new PostRequest($url, $headerCollection, $parameterCollection, $cookieParameterCollection, $requestBody);
             }
             case RequestMethod::PUT: {
                 $parameterCollection = RequestParameterCollection::fromArray($this->globalGet);
                 $requestBody = RequestBodyFactory::fromStream($this->inputStream);
-                return new PutRequest($url, $headerCollection, $parameterCollection, $requestBody);
+                $cookieParameterCollection = RequestParameterCollection::fromArray($this->cookie);
+                return new PutRequest($url, $headerCollection, $parameterCollection, $cookieParameterCollection, $requestBody);
             }
             case RequestMethod::PATCH: {
                 $parameterCollection = RequestParameterCollection::fromArray($this->globalGet);
                 $requestBody = RequestBodyFactory::fromStream($this->inputStream);
-                return new PatchRequest($url, $headerCollection, $parameterCollection, $requestBody);
+                $cookieParameterCollection = RequestParameterCollection::fromArray($this->cookie);
+                return new PatchRequest($url, $headerCollection, $parameterCollection, $cookieParameterCollection, $requestBody);
             }
             case RequestMethod::DELETE: {
                 $parameterCollection = RequestParameterCollection::fromArray($this->globalGet);
                 $requestBody = RequestBodyFactory::fromStream($this->inputStream);
-                return new DeleteRequest($url, $headerCollection, $parameterCollection, $requestBody);
+                $cookieParameterCollection = RequestParameterCollection::fromArray($this->cookie);
+                return new DeleteRequest($url, $headerCollection, $parameterCollection, $cookieParameterCollection, $requestBody);
             }
             default: {
                 throw new UnsupportedRequestMethodException($this->globalServer['REQUEST_METHOD']);
             }
         }
     }
-    
+
 }

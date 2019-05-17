@@ -77,7 +77,11 @@ class DeleteRequestTest extends TestCase {
         );
 
         $body = new RawRequestBody('foo bar');
-        return new DeleteRequest($uri, $headerCollection, $parameterCollection, $body);
+        return new DeleteRequest($uri,
+                                 $headerCollection,
+                                 $parameterCollection,
+                                 $parameterCollection,
+                                 $body);
     }
     
 }

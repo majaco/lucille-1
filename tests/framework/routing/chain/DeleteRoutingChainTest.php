@@ -58,7 +58,7 @@ class DeleteRoutingChainTest extends TestCase {
         $chain = new DeleteRoutingChain();
         $chain->addRouter($commandRouter);
         
-        $res = $chain->route(new DeleteRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new EmptyRequestBody()));
+        $res = $chain->route(new DeleteRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new RequestParameterCollection(), new EmptyRequestBody()));
         $this->assertInstanceOf(Command::class, $res);
     }
     
@@ -79,7 +79,7 @@ class DeleteRoutingChainTest extends TestCase {
         $chain->addRouter($nextRouter);
         $chain->addRouter($commandRouter);
         
-        $res = $chain->route(new DeleteRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new EmptyRequestBody()));
+        $res = $chain->route(new DeleteRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new RequestParameterCollection(), new EmptyRequestBody()));
         $this->assertInstanceOf(Command::class, $res);
     }
     
@@ -98,7 +98,7 @@ class DeleteRoutingChainTest extends TestCase {
      */
     public function testRoutingChainHasNoRoutersThrowsRoutingChainConfigurationException() {
         $chain = new DeleteRoutingChain();
-        $chain->route(new DeleteRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new EmptyRequestBody()));
+        $chain->route(new DeleteRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new RequestParameterCollection(), new EmptyRequestBody()));
     }
     
 }

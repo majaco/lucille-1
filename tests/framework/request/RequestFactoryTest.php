@@ -116,7 +116,7 @@ class RequestFactoryTest extends TestCase {
             'REQUEST_URI'    => '/test/100',
             'REQUEST_METHOD' => $requestMethod
         );
-        return (new RequestFactory(array(), array(), $server, 'php://input'))->createRequest();
+        return (new RequestFactory(array(), array(), $server, array(),'php://input'))->createRequest();
     }
     
 }//class

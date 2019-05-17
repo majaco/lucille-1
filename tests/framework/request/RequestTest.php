@@ -11,8 +11,8 @@ use PHPUnit\Framework\TestCase;
 
 
 class TestRequest extends Request {
-    public function __construct(Uri $uri, HeaderCollection $headerCollection, RequestParameterCollection $parameterCollection) {
-        parent::__construct($uri, $headerCollection, $parameterCollection);
+    public function __construct(Uri $uri, HeaderCollection $headerCollection, RequestParameterCollection $parameterCollection, RequestParameterCollection $cookieParameterCollection) {
+        parent::__construct($uri, $headerCollection, $parameterCollection, $cookieParameterCollection);
     }
 }
 
@@ -172,7 +172,7 @@ class RequestTest extends TestCase {
             );
         }
         
-        return new TestRequest($uri, $headerCollection, $parameterCollection);
+        return new TestRequest($uri, $headerCollection, $parameterCollection, $parameterCollection);
     }
     
 }

@@ -77,7 +77,7 @@ class PutRequestTest extends TestCase {
         );
         
         $body = new RawRequestBody('foo bar');
-        return new PutRequest($uri, $headerCollection, $parameterCollection, $body);
+        return new PutRequest($uri, $headerCollection, $parameterCollection, $parameterCollection, $body);
     }
     
 }

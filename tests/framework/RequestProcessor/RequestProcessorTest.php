@@ -150,7 +150,10 @@ class RequestProcessorTest extends TestCase {
      * @uses   \Lucille\Header\HeaderCollection
      */
     public function testProcessGetRequest() {
-        $request = new GetRequest(new Uri('/de/page1'), new HeaderCollection(), new RequestParameterCollection());
+        $request = new GetRequest(new Uri('/de/page1'),
+                                  new HeaderCollection(),
+                                  new RequestParameterCollection(),
+                                  new RequestParameterCollection());
         
         $chain = new GetRoutingChain();
         $chain->addRouter(new TestGetRouter1());
@@ -181,7 +184,11 @@ class RequestProcessorTest extends TestCase {
      * @uses   \Lucille\Header\HeaderCollection
      */
     public function testRunPostRequest() {
-        $request = new PostRequest(new Uri('/de/page1'), new HeaderCollection(), new RequestParameterCollection(), new EmptyRequestBody());
+        $request = new PostRequest(new Uri('/de/page1'),
+                                   new HeaderCollection(),
+                                   new RequestParameterCollection(),
+                                   new RequestParameterCollection(),
+                                   new EmptyRequestBody());
 
         $chain = new PostRoutingChain();
         $chain->addRouter(new TestPostRouter1());
@@ -212,7 +219,11 @@ class RequestProcessorTest extends TestCase {
      * @uses   \Lucille\Header\HeaderCollection
      */
     public function testRunPutRequest() {
-        $request = new PutRequest(new Uri('/de/page1'), new HeaderCollection(), new RequestParameterCollection(), new EmptyRequestBody());
+        $request = new PutRequest(new Uri('/de/page1'),
+                                  new HeaderCollection(),
+                                  new RequestParameterCollection(),
+                                  new RequestParameterCollection(),
+                                  new EmptyRequestBody());
         
         $chain = new PutRoutingChain();
         $chain->addRouter(new TestPutRouter1());
@@ -243,7 +254,11 @@ class RequestProcessorTest extends TestCase {
      * @uses   \Lucille\Header\HeaderCollection
      */
     public function testRunPatchRequest() {
-        $request = new PatchRequest(new Uri('/de/page1'), new HeaderCollection(), new RequestParameterCollection(), new EmptyRequestBody());
+        $request = new PatchRequest(new Uri('/de/page1'),
+                                    new HeaderCollection(),
+                                    new RequestParameterCollection(),
+                                    new RequestParameterCollection(),
+                                    new EmptyRequestBody());
         
         $chain = new PatchRoutingChain();
         $chain->addRouter(new TestPatchRouter1());
@@ -274,7 +289,11 @@ class RequestProcessorTest extends TestCase {
      * @uses   \Lucille\Header\HeaderCollection
      */
     public function testRunDeleteRequest() {
-        $request = new DeleteRequest(new Uri('/de/page1'), new HeaderCollection(), new RequestParameterCollection(), new EmptyRequestBody());
+        $request = new DeleteRequest(new Uri('/de/page1'),
+                                     new HeaderCollection(),
+                                     new RequestParameterCollection(),
+                                     new RequestParameterCollection(),
+                                     new EmptyRequestBody());
         
         $chain = new DeleteRoutingChain();
         $chain->addRouter(new TestDeleteRouter());
@@ -305,7 +324,11 @@ class RequestProcessorTest extends TestCase {
      * @uses   \Lucille\Exceptions\RoutingChainConfigurationException
      */
     public function testProcessRequestWithoutRoutingChainDefined() {
-        $request = new GetRequest(new Uri('/de/page1'), new HeaderCollection(), new RequestParameterCollection());
+        $request = new GetRequest(new Uri('/de/page1'),
+                                  new HeaderCollection(),
+                                  new RequestParameterCollection(),
+                                  new RequestParameterCollection())
+        ;
         $proc = new RequestProcessor();
         $response = $proc->run($request);
         
@@ -330,7 +353,11 @@ class RequestProcessorTest extends TestCase {
      * @expectedExceptionCode     3
      */
     public function testProcessRequestRouterThrowsCustomException() {
-        $request = new GetRequest(new Uri('/de/page1'), new HeaderCollection(), new RequestParameterCollection());
+        $request = new GetRequest(new Uri('/de/page1'),
+                                  new HeaderCollection(),
+                                  new RequestParameterCollection(),
+                                  new RequestParameterCollection()
+        );
         
         $chain = new GetRoutingChain();
         $chain->addRouter(new CustomExceptionThrowerRouter());

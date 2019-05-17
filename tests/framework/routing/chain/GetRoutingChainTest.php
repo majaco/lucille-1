@@ -57,7 +57,7 @@ class GetRoutingChainTest extends TestCase {
         $chain = new GetRoutingChain();
         $chain->addRouter($queryRouter);
         
-        $res = $chain->route(new GetRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection()));
+        $res = $chain->route(new GetRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new RequestParameterCollection()));
         $this->assertInstanceOf(Query::class, $res);
     }
     
@@ -78,7 +78,7 @@ class GetRoutingChainTest extends TestCase {
         $chain->addRouter($nextRouter);
         $chain->addRouter($queryRouter);
         
-        $res = $chain->route(new GetRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection()));
+        $res = $chain->route(new GetRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new RequestParameterCollection()));
         $this->assertInstanceOf(Query::class, $res);
     }
     
@@ -97,7 +97,7 @@ class GetRoutingChainTest extends TestCase {
      */
     public function testRoutingChainHasNoRoutersThrowsRoutingChainConfigurationException() {
         $chain = new GetRoutingChain();
-        $chain->route(new GetRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection()));
+        $chain->route(new GetRequest(new Uri('/'), new HeaderCollection(), new RequestParameterCollection(), new RequestParameterCollection()));
     }
     
 }
