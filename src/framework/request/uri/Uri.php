@@ -61,7 +61,7 @@ class Uri {
     public function getPart(int $index): UriPart {
         $tmp = explode('/', trim(urldecode($this->asString()), '/'));
         
-        if ($index > count($tmp) || $index < 0) {
+        if ($index >= count($tmp) || $index < 0) {
             throw new UriPartIndexOutOfBoundsException("No uri segment found for given index value");
         }
         return new UriPart($tmp[$index]);
