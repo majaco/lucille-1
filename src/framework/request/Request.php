@@ -93,6 +93,11 @@ abstract class Request {
         return $this->parameterCollection->getParam($name);
     }
 
+    public function hasParam(string $name): bool {
+        return $this->parameterCollection->hasParam($name);
+    }
+
+
     /**
      * @param string|null $name Parameter collection name
      * @return RequestParameterCollection
