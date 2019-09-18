@@ -142,5 +142,17 @@ class RequestParameterCollection implements \Countable,\IteratorAggregate {
     public function count(): int {
         return count($this->parameters);
     }
-    
+
+    public function asArray()
+    {
+        $result = [];
+        foreach ($this->getIterator() as $index => $item) {
+            if ($item instanceof StringRequestParameter) {
+                $result[] = $item->asString();
+            }
+        }
+
+        return $result;
+    }
+
 }
