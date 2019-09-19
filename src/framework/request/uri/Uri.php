@@ -66,7 +66,20 @@ class Uri {
         }
         return new UriPart($tmp[$index]);
     }
-    
+
+    /**
+     * @param int $index URI path index value
+     * @return bool
+     */
+    public function hasPart(int $index): bool {
+        $tmp = explode('/', trim(urldecode($this->asString()), '/'));
+
+        if ($index >= count($tmp) || $index < 0) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @param Uri $uri Uri reference
      * @return bool
