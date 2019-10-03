@@ -9,6 +9,7 @@
 
 namespace Lucille\Request;
 
+use Lucille\Exceptions\RequestParameterCollectionNotFoundException;
 use Lucille\Header\HeaderCollection;
 use Lucille\Request\Parameter\RequestParameter;
 use Lucille\Request\Parameter\RequestParameterCollection;
@@ -97,10 +98,14 @@ abstract class Request {
         return $this->parameterCollection->hasParam($name);
     }
 
-    public function hasParameterCollection(string $name): bool {
-        if (!isset($this->parameterCollection[$name])) {
+    public function hasParameterCollection(string $name): bool
+    {
+        try {
+            $this->getParameterCollection($name);
+        } catch (RequestParameterCollectionNotFoundException $e) {
             return false;
         }
+
         return true;
     }
 
