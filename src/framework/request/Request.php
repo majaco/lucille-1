@@ -97,6 +97,12 @@ abstract class Request {
         return $this->parameterCollection->hasParam($name);
     }
 
+    public function hasParameterCollection(string $name): bool {
+        if (!isset($this->parameterCollection[$name])) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * @param string|null $name Parameter collection name
