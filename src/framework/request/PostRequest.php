@@ -18,11 +18,16 @@ use Lucille\Request\Parameter\RequestParameterCollection;
  * @package Lucille\Request
  */
 class PostRequest extends Request {
-    
+
     /**
      * @var RequestBody
      */
     private $requestBody;
+
+    /**
+     * @var RequestParameterCollection
+     */
+    private $files;
 
     /**
      * @param Uri                        $uri                       Request Uir object
@@ -36,17 +41,23 @@ class PostRequest extends Request {
         HeaderCollection $headerCollection,
         RequestParameterCollection $parameterCollection,
         RequestParameterCollection $cookieParameterCollection,
-        RequestBody $requestBody
+        RequestBody $requestBody,
+        RequestParameterCollection $filesParameterCollection
     ) {
         parent::__construct($uri, $headerCollection, $parameterCollection, $cookieParameterCollection);
         $this->requestBody = $requestBody;
+        $this->filesParameterCollection = $filesParameterCollection;
     }
-    
+
     /**
      * @return RequestBody
      */
     public function getBody(): RequestBody {
         return $this->requestBody;
     }
-    
+
+    public function getFilesParameterCollection(): RequestParameterCollection
+    {
+        return $this->filesParameterCollection;
+    }
 }
