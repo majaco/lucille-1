@@ -32,7 +32,14 @@ abstract class PatchRouter {
     public function setNext(PatchRouter $router) {
         $this->next = $router;
     }
-    
+
+    public function hasNext(): bool {
+        if ($this->next === null) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @return PatchRouter
      * @throws RoutingChainConfigurationException

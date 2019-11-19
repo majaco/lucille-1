@@ -44,6 +44,13 @@ abstract class GetRouter {
         return $this->next;
     }
     
+    public function hasNext(): bool {
+        if ($this->next === null) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @param GetRequest $request GetRequest object
      * @return Query

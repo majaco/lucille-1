@@ -32,7 +32,14 @@ abstract class ResultRouter {
     public function setNext(ResultRouter $router): void {
         $this->next = $router;
     }
-    
+
+    public function hasNext(): bool {
+        if ($this->next === null) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @return ResultRouter
      * @throws RoutingChainConfigurationException

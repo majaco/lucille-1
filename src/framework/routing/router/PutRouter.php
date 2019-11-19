@@ -32,7 +32,14 @@ abstract class PutRouter {
     public function setNext(PutRouter $router) {
         $this->next = $router;
     }
-    
+
+    public function hasNext(): bool {
+        if ($this->next === null) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * @return PutRouter
      * @throws RoutingChainConfigurationException

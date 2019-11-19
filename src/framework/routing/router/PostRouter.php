@@ -32,7 +32,13 @@ abstract class PostRouter {
     public function setNext(PostRouter $router) {
         $this->next = $router;
     }
-    
+
+    public function hasNext(): bool {
+        if ($this->next === null) {
+            return false;
+        }
+        return true;
+    }
     /**
      * @return PostRouter
      * @throws RoutingChainConfigurationException
