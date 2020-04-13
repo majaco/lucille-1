@@ -105,9 +105,9 @@ abstract class Request {
         }
     }
 
-    public function getParamOrNull(string $name): ?RequestParameter {
+    public function getParamAsStringOrNull(string $name): ?string {
         try {
-            return $this->parameterCollection->getParam($name);
+            return $this->parameterCollection->getParam($name)->asString();
         } catch (RequestParameterNotFoundException $e) {
             return null;
         }
