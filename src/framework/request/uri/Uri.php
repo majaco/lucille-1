@@ -74,7 +74,7 @@ class Uri
     public function getPartAsStringOrNull(int $index): ?string
     {
         try {
-            $this->getPart($index)->asString();
+            return $this->getPart($index)->asString();
         } catch (UriPartIndexOutOfBoundsException $e) {
         }
         return null;
