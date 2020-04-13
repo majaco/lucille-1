@@ -10,9 +10,12 @@
 namespace Lucille\Request;
 
 use Lucille\Exceptions\RequestParameterCollectionNotFoundException;
+use Lucille\Exceptions\RequestParameterNotFoundException;
 use Lucille\Header\HeaderCollection;
 use Lucille\Request\Parameter\RequestParameter;
 use Lucille\Request\Parameter\RequestParameterCollection;
+use Lucille\Request\Parameter\StringRequestParameter;
+use Lucille\Request\Parameter\StringRequestParameterName;
 
 /**
  * Class Request
@@ -92,6 +95,22 @@ abstract class Request {
      */
     public function getParam(string $name): RequestParameter {
         return $this->parameterCollection->getParam($name);
+    }
+
+    public function getParamOrDefaultString(string $name, string $default): RequestParameter {
+        try {
+            return $this->parameterCollection->getParam($name);
+        } catch (RequestParameterNotFoundException $e) {
+            return new StringRequestParameter(new StringRequestParameterName(trim($name)), trim($default));
+        }
+    }
+
+    public function getParamOrNull(string $name): ?RequestParameter {
+        try {
+            return $this->parameterCollection->getParam($name);
+        } catch (RequestParameterNotFoundException $e) {
+            return null;
+        }
     }
 
     public function hasParam(string $name): bool {
